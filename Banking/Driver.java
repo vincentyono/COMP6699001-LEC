@@ -12,9 +12,9 @@ public class Driver {
     String command;
     Boolean exit = false;
     clearConsole();
-    System.out.println("--------------------------");
+    System.out.println("--------------------------------------------");
     System.out.println("Welcome to " + simulationBank.getBankName());
-    System.out.println("--------------------------");
+    System.out.println("--------------------------------------------");
     System.out.println();
 
     while (!exit) {
@@ -28,9 +28,9 @@ public class Driver {
 
         if (command.equals("login")) {
           clearConsole();
-          System.out.println("-------------------");
+          System.out.println("--------------------------------------------");
           System.out.println("Login to an account");
-          System.out.println("-------------------");
+          System.out.println("--------------------------------------------");
           System.out.println();
           System.out.printf("Enter username: ");
           String username = scanner.nextLine();
@@ -39,7 +39,8 @@ public class Driver {
           if (simulationBank.login(username, password) >= 0) {
             customerId = simulationBank.login(username, password);
             clearConsole();
-            System.out.printf("Hello, %s %s\n",
+            System.out.printf(
+                "Hello, %s %s\n\n",
                 simulationBank.getCustomer(customerId).getFirstName(),
                 simulationBank.getCustomer(customerId).getLastName());
           } else {
@@ -49,9 +50,9 @@ public class Driver {
           }
         } else if (command.equals("create")) {
           clearConsole();
-          System.out.println("-----------------");
+          System.out.println("--------------------------------------------");
           System.out.println("Create an account");
-          System.out.println("-----------------");
+          System.out.println("--------------------------------------------");
           System.out.println();
           System.out.printf("Enter first name: ");
           String firstName = scanner.nextLine();
@@ -63,7 +64,9 @@ public class Driver {
           simulationBank.addCustomer(firstName, lastName, username, password);
           customerId = simulationBank.login(username, password);
           clearConsole();
-          System.out.printf("Hello, %s %s\n", simulationBank.getCustomer(customerId).getFirstName(),
+          System.out.printf(
+              "Hello, %s %s\n",
+              simulationBank.getCustomer(customerId).getFirstName(),
               simulationBank.getCustomer(customerId).getLastName());
           System.out.println();
         } else if (command.equals("exit")) {
@@ -86,17 +89,23 @@ public class Driver {
         command = scanner.nextLine();
         if (command.equals("balance")) {
           clearConsole();
-          System.out.println("-----------------");
+          System.out.println("--------------------------------------------");
           System.out.printf(
-              "balance: $%.2f\n", simulationBank.getCustomer(customerId).getAccount().getBalance());
-          System.out.println("-----------------");
-          System.out.println();
+              "balance: $%.2f\n",
+              simulationBank.getCustomer(customerId).getAccount().getBalance());
+          System.out.println("--------------------------------------------");
           System.out.println();
         } else if (command.equals("deposit")) {
+          clearConsole();
+          System.out.println("--------------------------------------------");
+          System.out.println("Deposit");
+          System.out.println("--------------------------------------------");
           System.out.printf("Enter ammount: ");
           String input = scanner.nextLine();
           Double amount = Double.parseDouble(input);
-          if (simulationBank.getCustomer(customerId).getAccount().deposit(amount)) {
+          if (simulationBank.getCustomer(customerId)
+                  .getAccount()
+                  .deposit(amount)) {
             clearConsole();
             System.out.println("--------------------------------------------");
             System.out.printf("Successfully deposited $%.2f\n", amount);
@@ -107,13 +116,26 @@ public class Driver {
             System.out.println("Invalid amount");
             System.out.println();
           }
-          System.out.println(simulationBank.getCustomer(customerId).getAccount().deposit(amount));
-
         } else if (command.equals("withdraw")) {
+          clearConsole();
+          System.out.println("--------------------------------------------");
+          System.out.println("Withdraw");
+          System.out.println("--------------------------------------------");
           System.out.printf("Enter ammount: ");
           String input = scanner.nextLine();
           Double amount = Double.parseDouble(input);
-          simulationBank.getCustomer(customerId).getAccount().withdraw(amount);
+          if (simulationBank.getCustomer(customerId)
+                  .getAccount()
+                  .withdraw(amount)) {
+            System.out.println("--------------------------------------------");
+            System.out.printf("Successfully withdraw $%.2f\n", amount);
+            System.out.println("--------------------------------------------");
+            System.out.println();
+          } else {
+            clearConsole();
+            System.out.println("Invalid amount");
+            System.out.println();
+          }
         } else if (command.equals("logout")) {
           customerId = -1;
           clearConsole();
