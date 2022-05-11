@@ -1,25 +1,25 @@
 package Banking;
 
 public class Account {
-  private double balance;
+  private Double balance;
 
-  public Account(double balance) {
+  public Account(Double balance) {
     this.balance = balance;
   }
 
-  public double getBalance() {
+  public Double getBalance() {
     return this.balance;
   }
 
-  public Boolean deposit(double amount) {
-    if (amount > 0) {
+  public Boolean deposit(Double amount) {
+    if (amount > 0.0) {
       this.balance += amount;
       return true;
     }
     return false;
   }
 
-  public Boolean withdraw(double amount) {
+  public Boolean withdraw(Double amount) {
     if (this.balance >= amount) {
       this.balance -= amount;
       return true;
